@@ -9,9 +9,22 @@ import { StatusArgs } from './dto/args/status.args';
 export class TodoService {
   private todos: Todo[] = [
     { id: 1, description: 'Piedra del Alma', done: false },
-    { id: 2, description: 'Piedra del Espacio', done: false },
+    { id: 2, description: 'Piedra del Espacio', done: true },
     { id: 3, description: 'Piedra del Poder', done: false },
+    { id: 4, description: 'Piedra del Tiempo', done: false },
   ];
+
+  get totalTodos(): number {
+    return this.todos.length;
+  }
+
+  get pendingTodos(): number {
+    return this.todos.filter((todo) => todo.done === false).length;
+  }
+
+  get completedTodos(): number {
+    return this.todos.filter((todo) => todo.done === true).length;
+  }
 
   findAll(statusArgs: StatusArgs): Todo[] {
     const { status } = statusArgs;
